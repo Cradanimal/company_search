@@ -2,6 +2,7 @@ import axios from 'axios';
 import { formatGithubJson, formatWikipediaJson } from '../jsonToSearchResult';
 
 
+
 export const fetchCompanies = query => dispatch => {
     axios.get('https://api.github.com/search/repositories', {
         params: {
@@ -16,14 +17,15 @@ export const fetchCompanies = query => dispatch => {
         })
     })
 
-    axios.get('http://en.wikipedia.org/w/api.php', {
+    axios.get('https://en.wikipedia.org/w/api.php', {
         params: {
             format: 'json',
             action: 'query',
             list: 'search',
             srsearch: query,
             origin: '*'
-        }
+        },
+        withCredentials: false
     }).then(res => {
             console.log(res.data.query.search);
             dispatch({

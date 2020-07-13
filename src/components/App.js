@@ -8,7 +8,7 @@ const App = (props) => {
     const renderCompanies = () => {
         return props.companies.map(company => {
             return (
-                <Company description={company.description} name={company.name} link={company.link} id={company.id} />
+                <Company description={company.description} name={company.name} link={company.link} key={company.id} />
             );
         })
     }

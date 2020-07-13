@@ -8,6 +8,7 @@ const Search = (props) => {
     return (
         <div className='ui input'>
             <form 
+                type='button'
                 className='ui form'
                 onSubmit={e => {
                     e.preventDefault();
