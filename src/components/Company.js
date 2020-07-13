@@ -1,5 +1,4 @@
 import React from 'react';
-import companyReducer from '../reducers/companyReducer';
 
 const Company = (props) => {
     return (
