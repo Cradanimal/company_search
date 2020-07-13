@@ -1,11 +1,15 @@
 const altName = 'Title Not Available';
 const altDescription = 'Description Not Available';
+const htmlRegex = /<\/?[^>]+(>|$)/g;
 
+
+// Function to convert search results from Wikipedia
+// shapes result data to comform with properties expected by the Company Component
 export const formatWikipediaJson = data => {
     return data.map(result => {
         return {
             name: result.title || altName,
-            description: result.snippet.replace(/<\/?[^>]+(>|$)/g, "") || altDescription,
+            description: result.snippet.replace(htmlRegex, "") || altDescription,
             id: `wikipedia${result.pageid}`
         }
     })

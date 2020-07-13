@@ -4,19 +4,24 @@ import { formatGithubJson, formatWikipediaJson } from '../jsonToSearchResult';
 
 
 export const fetchCompanies = query => dispatch => {
+
+    // GithubAPI get request 
+    // results limited to ten for visibility during dev
+    // searches repository names and descriptions for the query value
     axios.get('https://api.github.com/search/repositories', {
         params: {
             q: query,
             per_page: 10
         }
     }).then(res => {
-        console.log(res.data.items);
         dispatch({
             type: 'FETCH_COMPANIES',
             payload: formatGithubJson(res.data.items)
         })
     })
 
+    //Wikipedia get request
+    // Return pages related to the query passed to srsearch prop
     axios.get('https://en.wikipedia.org/w/api.php', {
         params: {
             format: 'json',
@@ -27,13 +32,13 @@ export const fetchCompanies = query => dispatch => {
         },
         withCredentials: false
     }).then(res => {
-            console.log(res.data.query.search);
             dispatch({
                 type: 'FETCH_COMPANIES',
                 payload: formatWikipediaJson(res.data.query.search)
             })
         })
 }
+
 
 export const clearCompanies = () => dispatch => {
     dispatch({
